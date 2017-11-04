@@ -12,12 +12,11 @@
         "dist:umd": "    NODE_ENV=dev        rollup -c -n xaret -i src/xaret.js -f umd -o dist/xaret.js",
         "dist:umd.min": "NODE_ENV=production rollup -c -n xaret -i src/xaret.js -f umd -o dist/xaret.min.js",
         "lint": "eslint src test",
-        "prepare": "npm run lint && npm run dist && npm run test",
         "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
-        "test": "nyc mocha"
+        "test": "mocha --compilers js:babel-core/register"
     },
     "peerDependencies": {
-        "rxjs": "^5.5.0"
+        "rxjs": "^5.5.2"
     },
     "dependencies": {
         "infestines": "^0.4.5",

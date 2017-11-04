@@ -120,7 +120,6 @@ function render(props, values) {
     let newChildren = null
 
     const at = [-1]
-
     for (const key in props) {
         const val = props[key]
         if (CHILDREN === key) {
@@ -189,7 +188,7 @@ function onAny(self, obs) {
         let idx = 0
         while (handlers[idx] !== handler)
             ++idx
-            // Found the index of this handler/value
+            // Found the index of this handler/value    
         const next = value => {
             const values = self.values
             if (values[idx] !== value) {
@@ -240,39 +239,35 @@ const FromClass = inherit(function FromClass(props) {
         this.values = 0
         forEachInProps(props, this, incValues)
         const n = this.values // Here this.values contains the number of observable values. Later on, it'll contain the actual values.
-
         switch (n) {
             case 0:
                 this.values = array0
-                break
-            case 1:
-                {
-
-                    this.values = this
-                    const handlers = () => {
-
-
-                    }
-                    const next = value => {
-                        if (this.values !== value) {
-                            this.values = value
-                            this.forceUpdate()
-                        }
-                    }
-                    const error = err => {
-                        throw err;
-                    }
-                    const complete = () => {
-                        this.values = [this.values]
-                        this.handlers = null
-                    }
-                    handlers.next = next;
-                    handlers.error = error;
-                    handlers.complete = complete;
-                    this.handlers = handlers 
-                    forEachInProps(props, handlers, onAny1)
                 break;
+            case 1:
+            {
+                this.values = this
+                const handlers = () => {}
+                const next = value => {
+                    if (this.values !== value) {
+                        this.values = value
+                        this.forceUpdate()
+                    }
                 }
+                const error = err => {
+                    throw err;
+                }
+                const complete = () => {
+                    this.values = [this.values]
+                    this.handlers = null
+                }
+                handlers.next = next;
+                handlers.error = error;
+                handlers.complete = complete;
+                this.handlers = handlers 
+                forEachInProps(props, handlers, onAny1)
+                break;
+            }
+                
             default:
                 this.values = Array(n).fill(this)
                 this.handlers = []
@@ -288,8 +283,9 @@ const FromClass = inherit(function FromClass(props) {
         } else {
             const values = this.values
             for (let i = 0, n = values.length; i < n; ++i)
-                if (values[i] === this)
+                if (values[i] === this){
                     return null
+                }
             return render(this.props, values)
         }
     }

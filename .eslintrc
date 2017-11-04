@@ -16,6 +16,7 @@
         "semi": [0, "never"]
     },
     "globals": {
-        "process": true
+        "process": true,
+        "require": true
     }
 }

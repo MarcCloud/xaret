@@ -69,9 +69,12 @@ var fromRx = function fromRx(observable) {
 };
 
 function renderChildren(children, at, values) {
+    console.log('Enter children!!!!');
     if (isObs(children)) {
+        console.log('Childres is obs', children);
         return values[++at[0]];
     } else if (infestines.isArray(children)) {
+        console.log('Childres is array', children);
         var newChildren = children;
         for (var i = 0, n = children.length; i < n; ++i) {
             var childI = children[i];
@@ -118,7 +121,7 @@ function _render(props, values) {
     var newChildren = null;
 
     var at = [-1];
-
+    console.log(props, values);
     for (var key in props) {
         var val = props[key];
         if (CHILDREN === key) {
