@@ -47,7 +47,7 @@ describe('Basics', () => {
    '<div style="display:block;color:red;background:green"><p>Hello</p><p>World</p></div>');
 
     testRender(<a href="#lol" style={Rx.Observable.of({color:'red'})} >
-                {Rx.Observable.of("Hello")} {Rx.Observable.of('world')}
+                {Rx.Observable.of("Hello")} {Rx.Observable.of('world!')}
               </a>,
               '<a href="#lol" style="color:red">Hello world!</a>');
     testRender(<div>{Rx.Observable.of(0).delay(1000)}</div>, "")
