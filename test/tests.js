@@ -1,5 +1,5 @@
 import Rx from 'rxjs/Rx';
-import * as React  from '../src/xaret';
+import * as React  from '../dist/xaret';
 import { Component } from 'react';
 import ReactDOM from 'react-dom/server';
 import PropTypes from 'prop-types';

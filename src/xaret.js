@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Rx from 'rxjs/Rx';
+
 const {
   array0,
   dissocPartialU,
@@ -8,7 +8,7 @@ const {
   isString,
   object0
 } = require('infestines')
-
+const Rx = require('rxjs/Rx');
 const isObs = x => x instanceof Rx.Observable;
 
 const VALUE = 'value'
