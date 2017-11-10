@@ -15,13 +15,11 @@
         "report-coverage": "nyc report --reporter=lcov > coverage.lcov && codecov",
         "test": "mocha --compilers js:babel-core/register"
     },
-    "peerDependencies": {
-        "rxjs": "^5.5.2"
-    },
+    "peerDependencies": {},
     "dependencies": {
         "infestines": "^0.4.5",
-        "react": "^16.0.0",
-        "rxjs": "^5.5.2"
+        "is-observable": "^1.0.0",
+        "react": "^16.1.0"
     },
     "devDependencies": {
         "babel-cli": "^6.26.0",
@@ -45,6 +43,8 @@
         "rollup-plugin-commonjs": "^8.2.1",
         "rollup-plugin-node-resolve": "^3.0.0",
         "rollup-plugin-replace": "^2.0.0",
-        "rollup-plugin-uglify": "^2.0.1"
+        "rollup-plugin-uglify": "^2.0.1",
+        "rxjs": "^5.5.2",
+        "uglify-es": "^3.1.8"
     }
 }

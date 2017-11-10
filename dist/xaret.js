@@ -4,6 +4,84 @@
 	(factory((global.xaret = {}),global.React));
 }(this, (function (exports,React) { 'use strict';
 
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+
+
+function unwrapExports (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var ponyfill = createCommonjsModule(function (module, exports) {
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports['default'] = symbolObservablePonyfill;
+	function symbolObservablePonyfill(root) {
+		var result;
+		var _Symbol = root.Symbol;
+
+		if (typeof _Symbol === 'function') {
+			if (_Symbol.observable) {
+				result = _Symbol.observable;
+			} else {
+				result = _Symbol('observable');
+				_Symbol.observable = result;
+			}
+		} else {
+			result = '@@observable';
+		}
+
+		return result;
+	}
+});
+
+unwrapExports(ponyfill);
+
+var lib = createCommonjsModule(function (module, exports) {
+  'use strict';
+
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+
+  var _ponyfill2 = _interopRequireDefault(ponyfill);
+
+  function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { 'default': obj };
+  }
+
+  var root; /* global window */
+
+  if (typeof self !== 'undefined') {
+    root = self;
+  } else if (typeof window !== 'undefined') {
+    root = window;
+  } else if (typeof commonjsGlobal !== 'undefined') {
+    root = commonjsGlobal;
+  } else {
+    root = module;
+  }
+
+  var result = (0, _ponyfill2['default'])(root);
+  exports['default'] = result;
+});
+
+unwrapExports(lib);
+
+var symbolObservable$1 = lib;
+
+'use strict';
+const symbolObservable = symbolObservable$1.default;
+
+var isObservable = fn => Boolean(fn && fn[symbolObservable]);
+
 var _require = require('infestines');
 var array0 = _require.array0;
 var dissocPartialU = _require.dissocPartialU;
@@ -11,11 +89,6 @@ var inherit = _require.inherit;
 var isArray = _require.isArray;
 var isString = _require.isString;
 var object0 = _require.object0;
-
-var Rx = require('rxjs/Rx');
-var isObs = function isObs(x) {
-  return x instanceof Rx.Observable;
-};
 
 var VALUE = 'value';
 var ERROR = 'error';
@@ -47,7 +120,7 @@ var LiftedComponent = /*#__PURE__*/inherit(function LiftedComponent(props) {
   }
 });
 
-var FromRx = /*#__PURE__*/inherit(function FromKefir(props) {
+var FromRx = /*#__PURE__*/inherit(function FromRx(props) {
   LiftedComponent.call(this, props);
   this.handlers = null;
   this.rendered = null;
@@ -61,7 +134,7 @@ var FromRx = /*#__PURE__*/inherit(function FromKefir(props) {
 
     var observable = _ref.observable;
 
-    if (isObs(observable)) {
+    if (isObservable(observable)) {
       var handler = function handler(e) {
         switch (e.type) {
           case VALUE:
@@ -91,14 +164,14 @@ var fromRx = function fromRx(observable) {
 };
 
 function renderChildren(children, self, values) {
-  if (isObs(children)) {
+  if (isObservable(children)) {
     return values[self.at++];
   } else if (isArray(children)) {
     var newChildren = children;
     for (var i = 0, n = children.length; i < n; ++i) {
       var childI = children[i];
       var newChildI = childI;
-      if (isObs(childI)) {
+      if (isObservable(childI)) {
         newChildI = values[self.at++];
       } else if (isArray(childI)) {
         newChildI = renderChildren(childI, self, values);
@@ -118,7 +191,7 @@ function renderStyle(style, self, values) {
   var newStyle = null;
   for (var i in style) {
     var styleI = style[i];
-    if (isObs(styleI)) {
+    if (isObservable(styleI)) {
       if (!newStyle) {
         newStyle = {};
         for (var j in style) {
@@ -151,8 +224,8 @@ function _render(self, values) {
       type = props[key];
     } else if (DD_REF === key) {
       newProps = newProps || {};
-      newProps.ref = isObs(val) ? values[self.at++] : val;
-    } else if (isObs(val)) {
+      newProps.ref = isObservable(val) ? values[self.at++] : val;
+    } else if (isObservable(val)) {
       newProps = newProps || {};
       newProps[key] = values[self.at++];
     } else if (STYLE === key) {
@@ -172,21 +245,21 @@ function _render(self, values) {
 function forEachInChildrenArray(children, extra, fn) {
   for (var i = 0, n = children.length; i < n; ++i) {
     var childI = children[i];
-    if (isObs(childI)) fn(extra, childI);else if (isArray(childI)) forEachInChildrenArray(childI, extra, fn);
+    if (isObservable(childI)) fn(extra, childI);else if (isArray(childI)) forEachInChildrenArray(childI, extra, fn);
   }
 }
 
 function forEachInProps(props, extra, fn) {
   for (var key in props) {
     var val = props[key];
-    if (isObs(val)) {
+    if (isObservable(val)) {
       fn(extra, val);
     } else if (CHILDREN === key) {
       if (isArray(val)) forEachInChildrenArray(val, extra, fn);
     } else if (STYLE === key) {
       for (var k in val) {
         var valK = val[k];
-        if (isObs(valK)) fn(extra, valK);
+        if (isObservable(valK)) fn(extra, valK);
       }
     }
   }
@@ -326,7 +399,7 @@ var FromClass = /*#__PURE__*/inherit(function FromClass(props) {
 function hasObsInChildrenArray(i, children) {
   for (var n = children.length; i < n; ++i) {
     var child = children[i];
-    if (isObs(child) || isArray(child) && hasObsInChildrenArray(0, child)) {
+    if (isObservable(child) || isArray(child) && hasObsInChildrenArray(0, child)) {
       return true;
     }
   }
@@ -336,13 +409,13 @@ function hasObsInChildrenArray(i, children) {
 function hasObsInProps(props) {
   for (var key in props) {
     var val = props[key];
-    if (isObs(val)) {
+    if (isObservable(val)) {
       return true;
     } else if (CHILDREN === key) {
       if (isArray(val) && hasObsInChildrenArray(0, val)) return true;
     } else if (STYLE === key) {
       for (var k in val) {
-        if (isObs(val[k])) return true;
+        if (isObservable(val[k])) return true;
       }
     }
   }

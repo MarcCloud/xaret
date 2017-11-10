@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import isObs from 'is-observable';
 const {
   array0,
   dissocPartialU,
@@ -8,8 +8,7 @@ const {
   isString,
   object0
 } = require('infestines')
-const Rx = require('rxjs/Rx');
-const isObs = x => x instanceof Rx.Observable;
+
 
 const VALUE = 'value'
 const ERROR = 'error'
@@ -41,7 +40,7 @@ const LiftedComponent = /*#__PURE__*/inherit(function LiftedComponent (props) {
   }
 })
 
-const FromRx = /*#__PURE__*/inherit(function FromKefir(props) {
+const FromRx = /*#__PURE__*/inherit(function FromRx(props) {
     LiftedComponent.call(this, props)
     this.handlers = null;
     this.rendered = null;
