@@ -25,9 +25,6 @@ observables into VDOM has the following benefits:
 Using Xaret couldn't be simpler.  You just `import * as React from "xaret"` and
 you are good to go.
 
-[![npm version](https://badge.fury.io/js/xaret.svg)](http://badge.fury.io/js/xaret)
-[![](https://david-dm.org/calmm-js/xaret.svg)](https://david-dm.org/calmm-js/xaret)
-
 ## Contents
 
 * [Contrived Example](#example)
