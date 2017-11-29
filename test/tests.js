@@ -1,7 +1,7 @@
 import Rx from 'rxjs/Rx';
 import Bacon from 'baconjs';
 import * as Kefir from 'kefir';
-import * as most from 'most';
+//import * as most from 'most';
 import xstream from 'xstream';
 import * as React  from '../dist/xaret';
 import { Component } from 'react';
