@@ -40,7 +40,7 @@ const LiftedComponent = /*#__PURE__*/inherit(function LiftedComponent (props) {
   }
 })
 
-const FromRx = /*#__PURE__*/inherit(function FromRx(props) {
+const FromObservable = /*#__PURE__*/inherit(function FromObservable(props) {
     LiftedComponent.call(this, props)
     this.handlers = null;
     this.rendered = null;
@@ -76,7 +76,7 @@ const FromRx = /*#__PURE__*/inherit(function FromRx(props) {
     }
   })
   
-  export const fromRx = observable => reactElement(FromRx, {observable})
+  export const fromObservable = observable => reactElement(FromObservable, {observable})
 
 function renderChildren (children, self, values) {
   if (isObs(children)) {

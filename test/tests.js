@@ -83,8 +83,8 @@ describe('Basics', () => {
       '<div>Test: Hello world!</div>')
 })
 
-describe("fromBacon", () => {
-  testRender(React.fromRx(Rx.Observable.of(<p>Yes</p>)), '<p>Yes</p>')
+describe("fromObservable", () => {
+  testRender(React.fromObservable(Rx.Observable.of(<p>Yes</p>)), '<p>Yes</p>')
 })
 
 describe("fromClass", () => {

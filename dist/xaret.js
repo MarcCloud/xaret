@@ -120,7 +120,7 @@ var LiftedComponent = /*#__PURE__*/inherit(function LiftedComponent(props) {
   }
 });
 
-var FromRx = /*#__PURE__*/inherit(function FromRx(props) {
+var FromObservable = /*#__PURE__*/inherit(function FromObservable(props) {
   LiftedComponent.call(this, props);
   this.handlers = null;
   this.rendered = null;
@@ -159,8 +159,8 @@ var FromRx = /*#__PURE__*/inherit(function FromRx(props) {
   }
 });
 
-var fromRx = function fromRx(observable) {
-  return reactElement(FromRx, { observable: observable });
+var fromObservable = function fromObservable(observable) {
+  return reactElement(FromObservable, { observable: observable });
 };
 
 function renderChildren(children, self, values) {
@@ -457,7 +457,7 @@ var fromClass = function fromClass(Class) {
   };
 };
 
-exports.fromRx = fromRx;
+exports.fromObservable = fromObservable;
 exports.createElement = createElement$1;
 exports.fromClass = fromClass;
 
