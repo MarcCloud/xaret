@@ -1,4 +1,8 @@
 import Rx from 'rxjs/Rx';
+import Bacon from 'baconjs';
+import * as Kefir from 'kefir';
+import * as most from 'most';
+import xstream from 'xstream';
 import * as React  from '../dist/xaret';
 import { Component } from 'react';
 import ReactDOM from 'react-dom/server';
@@ -123,3 +127,17 @@ describe("context", () => {
   testRender(<Context context={{ message: Rx.Observable.of('Hello') }}><Top /></Context>,
     "<div><div>Top <div>Middle <div>Bottom Hello</div></div></div></div>")
 })
+
+describe("Works with ES Observable", () => {
+  const WithBacon = () => <span>{Bacon.constant('Delicious bacon...').toESObservable()}</span>
+  testRender(<WithBacon />, "<span>Delicious bacon...</span>");
+
+  const WithKefir = () => <span>{Kefir.constant('Sweet kefir...').toESObservable()}</span>
+  testRender(<WithKefir />, "<span>Sweet kefir...</span>");
+  //TODO: Research more on how to work with mostjs
+  // const WithMost = () => <span>{most.just('Get the most of this...')}</span>
+  // testRender(<WithMost />, "<span>Get the most of this...</span>");
+
+  const Xtreme = () => <span>{xstream.of('Xstream component...')}</span>
+  testRender(<Xtreme />, "<span>Xstream component...</span>")
+});
