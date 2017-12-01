@@ -145,7 +145,7 @@ The `$$ref` attribute on an element whose component is lifted using `fromClass`
 ```jsx
 <Link2 href="https://www.youtube.com/watch?v=Rbm6GXllBiw"
        $$ref={elem => elem && elem.focus()}>
-  {Kefir.sequentially(1000, [3, 2, 1, "Boom!"])}
+  {Rx.Observable.from([3, 2, 1, "Boom!"], Rx.Observable.interval(1000))}
 </Link2>
 ```
 
