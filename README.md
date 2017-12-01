@@ -55,6 +55,7 @@ const Clock = () =>
   </div>
 ```
 [![Edit nwmo5r1lj](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/nwmo5r1lj)
+
 with VDOM that can have embedded [Rx.Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html)
 observables.  This works because Xaret exports an enhanced version of
 `createElement`.
