@@ -54,7 +54,7 @@ const Clock = () =>
     The time is {oncePerSecond$.map(() => new Date().toString())}.
   </div>
 ```
-
+[![Edit nwmo5r1lj](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/nwmo5r1lj)
 with VDOM that can have embedded [Rx.Observable](http://reactivex.io/rxjs/class/es6/Observable.js~Observable.html)
 observables.  This works because Xaret exports an enhanced version of
 `createElement`.
@@ -67,7 +67,7 @@ or the Babel JSX transform.
 you export it, you can use it just like any other React component and even in
 modules that do not import `xaret`.
 
-[![Edit nwmo5r1lj](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/nwmo5r1lj)
+
 
 ## Reference
 
