@@ -5,6 +5,10 @@
     "main": "./dist/xaret.js",
     "author": "Marco Romero",
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MarcCloud/xaret.git"
+    },
     "scripts": {
         "dist": "npm run dist:umd & npm run dist:umd.min & npm run dist:es & npm run dist:cjs & wait",
         "dist:cjs": "    NODE_ENV=           rollup -c -n xaret -i src/xaret.js -f cjs -o dist/xaret.cjs.js",
