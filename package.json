@@ -1,6 +1,6 @@
 {
     "name": "xaret",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Helpers to embed Rx Observables in React VDOM following the Calmm architecture",
     "main": "./dist/xaret.js",
     "author": "Marco Romero",
