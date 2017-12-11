@@ -126,7 +126,7 @@ var FromObservable = /*#__PURE__*/inherit(function FromObservable(props) {
   this.rendered = null;
 }, LiftedComponent, {
   componentWillUnmount: function componentWillUnmount() {
-    var handlder = this.hanlders.pop();
+    var handlder = isArray(this.handlers) ? this.hanlders.pop() : this.handlers;
     if (handlder) offAny1(handlder);
   },
   doSubscribe: function doSubscribe(_ref) {

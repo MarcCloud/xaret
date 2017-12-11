@@ -46,7 +46,7 @@ const FromObservable = /*#__PURE__*/inherit(function FromObservable(props) {
     this.rendered = null;
   }, LiftedComponent, {
     componentWillUnmount() {
-      const handlder = this.hanlders.pop()
+      const handlder = isArray(this.handlers) ? this.hanlders.pop() : this.handlers;
       if (handlder)
         offAny1(handlder)
     },
