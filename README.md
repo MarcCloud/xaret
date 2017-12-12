@@ -160,7 +160,7 @@ a special name had to be introduced for it.
 
 ## Previous Work
 
-`xaret.js` is a port of [`karet`](https://github.com/calmm-js/karet) to to use RxJS instead of Kefir for embeding observables into React components. This library is based and isnpired by the work of [@polytypic](https://github.com/polytypic) and [@fiatjaf](https://github.com/fiatjaf).
+`xaret.js` is a port of [`karet`](https://github.com/calmm-js/karet) to use RxJS instead of [KefirJS](https://kefirjs.github.io/kefir/) for embeding observables into React components. This library is based and isnpired by the work of [@polytypic](https://github.com/polytypic) and [@fiatjaf](https://github.com/fiatjaf).
 
 Read more about React Combinator at [Calmm-js](https://github.com/calmm-js).
 
